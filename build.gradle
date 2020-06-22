@@ -1,7 +1,53 @@
-plugins {
-    id 'java'
+buildscript {
+    ext {
+        springBootVersion = '2.1.1.RELEASE'
+    }
 }
 
+plugins {
+    id 'java'
+    id 'idea'
+    id "org.springframework.boot" version "2.1.1.RELEASE"
+    id 'io.spring.dependency-management' version '1.0.8.RELEASE'
+}
+
+group 'edu.microservice'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 11
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+    jcenter()
+    maven {
+        url = 'http://packages.confluent.io/maven/'
+    }
+}
+
+dependencies {
+    compile "org.springframework.boot:spring-boot-starter-web"
+    compile "org.springframework.boot:spring-boot-starter-data-jpa"
+//
+    compile "javax.xml.bind:jaxb-api:2.3.0"
+    compile("mysql:mysql-connector-java")
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+
+    compileOnly 'org.projectlombok:lombok:1.18.12'
+    annotationProcessor 'org.projectlombok:lombok:1.18.12'
+
+}
+
+idea {
+    project {
+        sourceCompatibility = 11
+        languageLevel = 11
+    }
+}
+
+bootJar {
+    baseName = "microservice"
+}
 group 'edu.microservice'
 version '1.0-SNAPSHOT'
 
